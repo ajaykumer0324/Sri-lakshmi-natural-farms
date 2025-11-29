@@ -625,4 +625,33 @@
         </div>
       </section>
 
-    
+      <!-- Back to Top Button -->
+      <button id="backToTop" style="position:fixed;bottom:24px;right:24px;width:50px;height:50px;border-radius:50%;border:none;background:var(--accent-dark);color:white;font-size:20px;cursor:pointer;z-index:200">↑</button>
+
+      <!-- Chat Bubble -->
+      <div id="chatBubble" style="position:fixed;bottom:90px;right:24px;width:56px;height:56px;border-radius:50%;background:#4fb07a;display:flex;align-items:center;justify-content:center;color:white;font-size:26px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.18);z-index:200">💬</div>
+
+      <!-- Simple Chat Box -->
+      <div id="chatBox" style="position:fixed;bottom:160px;right:24px;width:280px;padding:16px;border-radius:14px;background:white;box-shadow:0 10px 40px rgba(0,0,0,0.22);display:none;z-index:220">
+        <strong style="font-size:16px;color:var(--accent-dark)">Chat with us</strong>
+        <p class="small muted">Hi! How can we help you today?</p>
+        <a class="btn" href="https://wa.me/917995976904" style="background:#25D366;display:block;text-align:center;margin-top:10px">WhatsApp Now</a>
+      </div>
+
+<script>
+// Back to Top
+const backToTop=document.getElementById('backToTop');
+window.addEventListener('scroll',()=>{
+  backToTop.style.display=window.scrollY>200?'block':'none';
+});
+backToTop.addEventListener('click',()=>{
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+// Chat Bubble
+const chatBubble=document.getElementById('chatBubble');
+const chatBox=document.getElementById('chatBox');
+chatBubble.addEventListener('click',()=>{
+  chatBox.style.display=chatBox.style.display==='none'?'block':'none';
+});
+</script>
