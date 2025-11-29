@@ -27,7 +27,7 @@
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg), radial-gradient(circle at 20% 20%, rgba(255,255,255,0.6), rgba(230,250,240,0.4)), radial-gradient(circle at 80% 80%, rgba(240,255,250,0.6), rgba(210,240,225,0.4));background-size:600px;color:#0b2b1a;margin:0;padding:0;line-height:1.6;font-size:16px}
+    body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg), radial-gradient(circle at 20% 20%, rgba(255,255,255,0.6), rgba(230,250,240,0.4)), radial-gradient(circle at 80% 80%, rgba(240,255,250,0.6), rgba(210,240,225,0.4));background-size:600px;color:var(--text);margin:0;padding:0;line-height:1.6;font-size:16px}
     .container{max-width:var(--max);margin:0 auto;padding:var(--pad)}
 
     /* Header */
@@ -598,10 +598,12 @@
           </div>
 
           <div style="margin-top:24px">
-            <iframe style="width:100%;height:260px;border:0;border-radius:12px" loading="lazy" allowfullscreen
-              src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=Tagarapuvalasa,Visakhapatnam">
-            </iframe>
-            <div class="small" style="margin-top:6px">* Replace API key for live map embed.</div>
+            <div class="card" style="padding:12px;background:transparent">
+              <p class="small muted">Find us on Google Maps:</p>
+              <a href="https://maps.app.goo.gl/DB2nXoSSR48DmUx59?g_st=ipc" target="_blank" rel="noopener noreferrer" class="btn" style="display:inline-block;padding:10px 14px;background:var(--accent-dark);color:#fff;border-radius:8px;text-decoration:none">Open in Google Maps</a>
+              <p class="small" style="margin-top:8px">Or use this link: <a href="https://maps.app.goo.gl/DB2nXoSSR48DmUx59?g_st=ipc" target="_blank" rel="noopener noreferrer">https://maps.app.goo.gl/DB2nXoSSR48DmUx59</a></p>
+              <p class="small" style="margin-top:6px">(Mobile users: tap the button to open the location in Google Maps app.)</p>
+            </div>
           </div>
         </div>
       </section>
@@ -639,19 +641,30 @@
       </div>
 
 <script>
+// Theme toggle (dark / light)
+(function(){
+  const themeToggle = document.getElementById('themeToggle');
+  const root = document.documentElement;
+  function applyTheme(theme){
+    if(theme==='dark') root.classList.add('dark'); else root.classList.remove('dark');
+    try{ localStorage.setItem('site-theme', theme); }catch(e){}
+    if(themeToggle) themeToggle.textContent = theme==='dark' ? '☀️' : '🌙';
+  }
+  const saved = (function(){ try{ return localStorage.getItem('site-theme'); }catch(e){return null;} })() || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  applyTheme(saved);
+  if(themeToggle){ themeToggle.addEventListener('click', ()=>{ applyTheme(root.classList.contains('dark') ? 'light' : 'dark'); }); }
+})();
+
 // Back to Top
 const backToTop=document.getElementById('backToTop');
 window.addEventListener('scroll',()=>{
+  if(!backToTop) return;
   backToTop.style.display=window.scrollY>200?'block':'none';
 });
-backToTop.addEventListener('click',()=>{
-  window.scrollTo({top:0,behavior:'smooth'});
-});
+if(backToTop){ backToTop.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); }); }
 
 // Chat Bubble
 const chatBubble=document.getElementById('chatBubble');
 const chatBox=document.getElementById('chatBox');
-chatBubble.addEventListener('click',()=>{
-  chatBox.style.display=chatBox.style.display==='none'?'block':'none';
-});
+if(chatBubble && chatBox){ chatBubble.addEventListener('click',()=>{ chatBox.style.display=chatBox.style.display==='none'?'block':'none'; }); }
 </script>
