@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -23,11 +23,9 @@
       --glass: rgba(255,255,255,0.9);
       --radius:14px;
       --max:1100px;
-      --pad:28px;
-    }
+      --pad:28px;--text:#0b2b1a;}
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg), radial-gradient(circle at 20% 20%, rgba(255,255,255,0.6), rgba(230,250,240,0.4)), radial-gradient(circle at 80% 80%, rgba(240,255,250,0.6), rgba(210,240,225,0.4));background-size:600px;color:var(--text);margin:0;padding:0;line-height:1.6;font-size:16px}
+    html,body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);background-image:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.6), rgba(230,250,240,0.4)), radial-gradient(circle at 80% 80%, rgba(240,255,250,0.6), rgba(210,240,225,0.4));background-size:600px;color:var(--text);margin:0;padding:0;line-height:1.6;font-size:16px}
     .container{max-width:var(--max);margin:0 auto;padding:var(--pad)}
 
     /* Header */
@@ -627,6 +625,9 @@
         </div>
       </section>
 
+      </main>
+    </div>
+
       <!-- Back to Top Button -->
       <button id="backToTop" style="position:fixed;bottom:24px;right:24px;width:50px;height:50px;border-radius:50%;border:none;background:var(--accent-dark);color:white;font-size:20px;cursor:pointer;z-index:200">↑</button>
 
@@ -641,7 +642,7 @@
       </div>
 
 <script>
-// Theme toggle (dark / light)
+// Theme toggle (light default, dark optional)
 (function(){
   const themeToggle = document.getElementById('themeToggle');
   const root = document.documentElement;
@@ -650,8 +651,10 @@
     try{ localStorage.setItem('site-theme', theme); }catch(e){}
     if(themeToggle) themeToggle.textContent = theme==='dark' ? '☀️' : '🌙';
   }
-  const saved = (function(){ try{ return localStorage.getItem('site-theme'); }catch(e){return null;} })() || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  applyTheme(saved);
+  // Respect a previously saved user choice only; otherwise default to LIGHT mode.
+  const saved = (function(){ try{ return localStorage.getItem('site-theme'); }catch(e){return null;} })();
+  const initial = saved ? saved : 'light';
+  applyTheme(initial);
   if(themeToggle){ themeToggle.addEventListener('click', ()=>{ applyTheme(root.classList.contains('dark') ? 'light' : 'dark'); }); }
 })();
 
@@ -668,3 +671,5 @@ const chatBubble=document.getElementById('chatBubble');
 const chatBox=document.getElementById('chatBox');
 if(chatBubble && chatBox){ chatBubble.addEventListener('click',()=>{ chatBox.style.display=chatBox.style.display==='none'?'block':'none'; }); }
 </script>
+</body>
+</html>
