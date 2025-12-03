@@ -27,7 +27,19 @@
       --text:#0b2b1a;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
+    html,
+body {
+    height: 100%;
+    overflow-x: hidden;   /* ← add this line (stops page-level horizontal scrolling) */
+}
+
+/* also ensure the hero can't push layout wider */
+.hero {
+    max-width: 100%;
+    overflow-x: hidden;   /* ← add this line (stops the hero grid from creating extra width) */
+    box-sizing: border-box;
+}
+
     body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);background-image:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.6), rgba(230,250,240,0.4)), radial-gradient(circle at 80% 80%, rgba(240,255,250,0.6), rgba(210,240,225,0.4));background-size:600px;color:var(--text);margin:0;padding:0;line-height:1.6;font-size:16px}
 
     .container{max-width:var(--max);margin:0 auto;padding:var(--pad)}
